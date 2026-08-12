@@ -1,3 +1,8 @@
-# Cyber Security Task 1 - Basic Network Scanning with Nmap
+## Nmap Installation
 
-This project is part of the Oasis Infobyte Cyber Security Internship.
+Kali Linux was already installed in a local virtual machine environment and Nmap was available by default.
+
+To verify that Nmap was installed correctly, the following command was executed:
+
+```bash
+nmap --version
