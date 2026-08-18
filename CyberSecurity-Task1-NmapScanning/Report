@@ -1,0 +1,197 @@
+Cyber Security Task 1 – Basic Network Scanning with Nmap
+
+1. Introduction
+
+This project was completed as part of the Oasis Infobyte Cyber Security Internship. The purpose of this task was to understand how network scanning can be performed using Nmap and how the results can be used to identify the network exposure of a system.
+
+For this task, I used my Kali Linux virtual machine as the testing environment and performed the scans on my own system.
+
+2. Objective
+
+The main objectives of this task were:
+
+* To verify the installation of Nmap.
+* To perform a basic network scan.
+* To identify available services and their versions.
+* To perform operating system detection.
+* To identify open, closed, and filtered ports.
+* To understand the security meaning of the scan results.
+* To document the findings in a clear and structured way.
+
+3. Environment Used
+
+| Item                    | Details         |
+| ----------------------- | --------------- |
+| Operating System        | Kali Linux      |
+| Tool                    | Nmap            |
+| Nmap Version            | 7.99            |
+| Primary Target          | 192.168.163.129 |
+| Additional Local Target | 127.0.0.1       |
+
+The testing was performed in my local Kali Linux environment.
+
+4. Nmap Installation and Verification
+
+Kali Linux was already installed in my virtual machine before starting this task. Nmap was also available in the Kali Linux environment.
+
+I verified the Nmap installation by running:
+
+bash
+nmap --version
+
+
+The terminal displayed:
+
+text
+Nmap version 7.99
+
+
+This confirmed that Nmap was installed and working correctly.
+
+If Nmap is not installed on a Debian-based Linux system, it can be installed using:
+
+bash
+sudo apt update
+sudo apt install nmap
+
+
+The installation can then be verified using:
+
+bash
+nmap --version
+
+A screenshot of the Nmap version verification is included in the project screenshots.
+
+5. What is Nmap?
+
+Nmap, short for Network Mapper, is a network scanning tool used to discover hosts and examine the ports and services available on a system.
+
+It can be used to determine whether ports are open, closed, or filtered. Nmap also provides options for identifying services and attempting to determine the operating system of a target.
+
+It is commonly used by security professionals and network administrators for network discovery, troubleshooting, and security assessments.
+
+6. Why Network Scanning Matters
+
+Network scanning is useful because it provides information about how a system is exposed to a network.
+
+An open port can indicate that a service is listening for connections. If unnecessary or poorly secured services are exposed, they can increase the attack surface of a system.
+
+Regular scanning can help administrators identify unexpected services, review firewall configurations, and check whether changes to a system have introduced new network exposure.
+
+Network scanning should always be performed only on systems that are owned by the tester or where proper permission has been provided.
+
+7. Scanning Methodology
+
+Three main Nmap scans were performed against the primary target.
+
+7.1 Basic Scan
+
+The following command was used:
+
+bash
+nmap 192.168.163.129
+
+The scan showed that the host was up.
+
+Nmap scanned the default 1000 TCP ports. The results showed that the ports were filtered and no open ports were identified.
+
+7.2 Service and Version Scan
+
+The following command was used:
+
+bash
+nmap -sV 192.168.163.129
+
+
+This scan was used to identify services and their versions on open ports.
+
+The host was detected as up, but no open TCP ports were identified. Therefore, no running network services were identified by this scan.
+
+7.3 OS Detection Scan
+
+The following command was used:
+
+bash
+sudo nmap -O 192.168.163.129
+
+The host was detected as up. However, Nmap could not provide specific operating system details because there were not enough fingerprints available from the scan.
+
+7.4 Additional Localhost Scan
+
+As an additional check, I performed a scan against the local loopback address:
+
+bash
+sudo nmap -sS -sV -O 127.0.0.1
+
+
+The localhost was detected as up. All 1000 scanned TCP ports were reported as closed, and no open TCP ports were identified.
+
+8. Scan Results
+
+| Target          | Scan                 | Result                            |
+| --------------- | -------------------- | --------------------------------- |
+| 192.168.163.129 | Basic scan           | 1000 ports filtered               |
+| 192.168.163.129 | Service/version scan | No open ports identified          |
+| 192.168.163.129 | OS detection         | No specific OS details identified |
+| 127.0.0.1       | SYN/service/OS scan  | 1000 TCP ports closed             |
+
+The complete scan observations are also documented in `nmap_scan_results.txt`.
+
+9. Open Port / Security Analysis
+
+No open TCP ports were identified during the scans.
+
+Because there were no open ports, there were no individual network services that could be analysed for exposed-port risks.
+
+The primary target, `192.168.163.129`, returned the scanned ports as **filtered**. A filtered result means that Nmap could not determine whether the port was open or closed because the probes did not receive the expected response. This can occur when traffic is being filtered by a firewall or another network control.
+
+The localhost scan returned the ports as **closed**. A closed port responds to the scan, but no application is listening on that port.
+
+From the results observed during this task, no exposed TCP services were identified on the scanned ports. This reduces the visible TCP attack surface at the time of testing. However, the system should still be checked regularly because network services can change when applications are installed, enabled, or reconfigured.
+
+10. Recommendations
+
+Based on the scan results, the following practices are recommended:
+
+1. Keep unnecessary network services disabled.
+2. Maintain appropriate firewall rules for incoming connections.
+3. Regularly scan systems for newly exposed ports.
+4. Keep required network services updated.
+5. Review firewall settings when ports appear as filtered.
+6. Perform another scan after major system or network configuration changes.
+
+11. Screenshots
+
+*Nmap Version Verification
+
+The following screenshot shows that Nmap version 7.99 was installed and working correctly.
+
+![Nmap Version](nmap_version.png)
+
+*Nmap Scan Results
+
+The following screenshot contains the basic scan, service/version scan, and OS detection results.
+
+![Nmap Scan Results](nmap_scan_results.png)
+
+*Localhost Scan
+
+The following screenshot shows the additional scan performed against `127.0.0.1`.
+
+![Localhost Scan](localhost_scan.png)
+
+12. Ethical Considerations
+
+Nmap can provide detailed information about systems and networks, so it should only be used on systems that the tester owns or has explicit permission to assess.
+
+For this task, I used my own Kali Linux environment and performed the scans in a controlled environment.
+
+I did not scan external websites, public servers, university networks, or other systems without authorization.
+
+13. Conclusion
+
+This task gave me practical experience with Nmap and basic network scanning. I performed a basic scan, service and version detection, OS detection, and an additional localhost scan.
+
+The scans did not identify any open TCP ports on the tested targets. I also learned how Nmap reports ports as filtered or closed and how these results can be useful when reviewing the network exposure of a system.
+
+Overall, the task helped me understand the basic process of network scanning and the importance of checking exposed services as part of a security assessment.
