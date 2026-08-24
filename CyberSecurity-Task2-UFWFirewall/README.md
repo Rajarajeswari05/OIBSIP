@@ -39,16 +39,16 @@ UFW Configuration and Status
 
 This screenshot shows the UFW installation/version, active firewall status, and configured firewall rules.
 
-![UFW Configuration and Status](screenshots/01_ufw_configuration_status.)
+
 
 UFW Configuration Script
 
 This screenshot shows the `ufw_configuration.sh` script used to document the firewall configuration.
 
-![UFW Configuration Script](screenshots/02_ufw_script.png)
+
 
 HTTP Traffic Test
 
 This screenshot shows the HTTP traffic test performed against the local system.
 
-![HTTP Traffic Test](screenshots/03_http_test.png)
+
