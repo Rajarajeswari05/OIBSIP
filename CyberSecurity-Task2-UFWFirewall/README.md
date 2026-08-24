@@ -33,6 +33,8 @@ UFW was installed using the following command:
 
 bash
 apt install ufw
+
+
 5. Screenshots
 
 UFW Configuration and Status
